@@ -70,7 +70,7 @@ namespace ProfileTransfer
                     profile.Name = $"user{i}";
                     profile.AutoSize = false;
                     profile.Cursor = Cursors.Hand;
-                    profile.Location = new System.Drawing.Point(sptUserPlaceholder.Location.X, sptUserPlaceholder.Location.Y + (i * 30));
+                    profile.Location = new System.Drawing.Point(sptUserPlaceholder.Location.X, sptUserPlaceholder.Location.Y + (i * 27));
                     profile.Size = new System.Drawing.Size(sptUserPlaceholder.Size.Width, sptUserPlaceholder.Size.Height);
                     profile.BackColor = idleColor;
                     profile.ForeColor = Color.DarkGray;

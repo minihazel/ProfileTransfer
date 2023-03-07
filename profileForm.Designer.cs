@@ -50,8 +50,10 @@
             this.button1 = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.newUserList = new System.Windows.Forms.Panel();
-            this.label9 = new System.Windows.Forms.Label();
+            this.newUserPlaceholder = new System.Windows.Forms.Label();
             this.sptClearAllSelections = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.watermarkPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.sptPanel.SuspendLayout();
@@ -114,7 +116,7 @@
             this.sptPanel.Controls.Add(this.label6);
             this.sptPanel.Location = new System.Drawing.Point(0, 3);
             this.sptPanel.Name = "sptPanel";
-            this.sptPanel.Size = new System.Drawing.Size(341, 387);
+            this.sptPanel.Size = new System.Drawing.Size(340, 387);
             this.sptPanel.TabIndex = 3;
             // 
             // sptUserList
@@ -126,7 +128,7 @@
             this.sptUserList.Controls.Add(this.sptUserPlaceholder);
             this.sptUserList.Location = new System.Drawing.Point(3, 108);
             this.sptUserList.Name = "sptUserList";
-            this.sptUserList.Size = new System.Drawing.Size(335, 276);
+            this.sptUserList.Size = new System.Drawing.Size(334, 276);
             this.sptUserList.TabIndex = 6;
             // 
             // label5
@@ -215,6 +217,8 @@
             // 
             // centralPanel
             // 
+            this.centralPanel.Controls.Add(this.button3);
+            this.centralPanel.Controls.Add(this.button2);
             this.centralPanel.Controls.Add(this.newPanel);
             this.centralPanel.Controls.Add(this.sptPanel);
             this.centralPanel.Location = new System.Drawing.Point(46, 142);
@@ -232,7 +236,7 @@
             this.sptUserPlaceholder.ForeColor = System.Drawing.Color.DarkGray;
             this.sptUserPlaceholder.Location = new System.Drawing.Point(0, 0);
             this.sptUserPlaceholder.Name = "sptUserPlaceholder";
-            this.sptUserPlaceholder.Size = new System.Drawing.Size(333, 27);
+            this.sptUserPlaceholder.Size = new System.Drawing.Size(332, 27);
             this.sptUserPlaceholder.TabIndex = 4;
             this.sptUserPlaceholder.Text = "dev_raccoon";
             this.sptUserPlaceholder.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -245,9 +249,9 @@
             this.newPanel.Controls.Add(this.label7);
             this.newPanel.Controls.Add(this.button1);
             this.newPanel.Controls.Add(this.label8);
-            this.newPanel.Location = new System.Drawing.Point(424, 3);
+            this.newPanel.Location = new System.Drawing.Point(498, 3);
             this.newPanel.Name = "newPanel";
-            this.newPanel.Size = new System.Drawing.Size(414, 387);
+            this.newPanel.Size = new System.Drawing.Size(340, 387);
             this.newPanel.TabIndex = 7;
             // 
             // label3
@@ -282,7 +286,7 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Bahnschrift SemiBold", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.LightGray;
-            this.button1.Location = new System.Drawing.Point(321, 5);
+            this.button1.Location = new System.Drawing.Point(247, 5);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(90, 42);
             this.button1.TabIndex = 2;
@@ -306,39 +310,72 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.newUserList.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.newUserList.Controls.Add(this.label9);
+            this.newUserList.Controls.Add(this.newUserPlaceholder);
             this.newUserList.Location = new System.Drawing.Point(3, 108);
             this.newUserList.Name = "newUserList";
-            this.newUserList.Size = new System.Drawing.Size(408, 276);
+            this.newUserList.Size = new System.Drawing.Size(334, 276);
             this.newUserList.TabIndex = 7;
             // 
-            // label9
+            // newUserPlaceholder
             // 
-            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.newUserPlaceholder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(55)))));
-            this.label9.Font = new System.Drawing.Font("Bahnschrift Light", 10F);
-            this.label9.ForeColor = System.Drawing.Color.DarkGray;
-            this.label9.Location = new System.Drawing.Point(0, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(406, 27);
-            this.label9.TabIndex = 4;
-            this.label9.Text = "dev_raccoon";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label9.Visible = false;
+            this.newUserPlaceholder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(55)))));
+            this.newUserPlaceholder.Font = new System.Drawing.Font("Bahnschrift Light", 10F);
+            this.newUserPlaceholder.ForeColor = System.Drawing.Color.DarkGray;
+            this.newUserPlaceholder.Location = new System.Drawing.Point(0, 0);
+            this.newUserPlaceholder.Name = "newUserPlaceholder";
+            this.newUserPlaceholder.Size = new System.Drawing.Size(332, 27);
+            this.newUserPlaceholder.TabIndex = 4;
+            this.newUserPlaceholder.Text = "dev_raccoon";
+            this.newUserPlaceholder.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.newUserPlaceholder.Visible = false;
             // 
             // sptClearAllSelections
             // 
+            this.sptClearAllSelections.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.sptClearAllSelections.AutoSize = true;
             this.sptClearAllSelections.Cursor = System.Windows.Forms.Cursors.Hand;
             this.sptClearAllSelections.Font = new System.Drawing.Font("Bahnschrift Light", 8F);
             this.sptClearAllSelections.ForeColor = System.Drawing.Color.DarkGray;
-            this.sptClearAllSelections.Location = new System.Drawing.Point(234, 87);
+            this.sptClearAllSelections.Location = new System.Drawing.Point(233, 87);
             this.sptClearAllSelections.Name = "sptClearAllSelections";
             this.sptClearAllSelections.Size = new System.Drawing.Size(103, 13);
             this.sptClearAllSelections.TabIndex = 7;
             this.sptClearAllSelections.Text = "Clear all selections";
             this.sptClearAllSelections.Click += new System.EventHandler(this.sptClearAllSelections_Click);
+            // 
+            // button2
+            // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button2.BackColor = System.Drawing.Color.DimGray;
+            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("Bahnschrift SemiBold", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.ForeColor = System.Drawing.Color.LightGray;
+            this.button2.Location = new System.Drawing.Point(346, 190);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(146, 42);
+            this.button2.TabIndex = 8;
+            this.button2.Text = "← Transfer";
+            this.button2.UseVisualStyleBackColor = false;
+            // 
+            // button3
+            // 
+            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button3.BackColor = System.Drawing.Color.DimGray;
+            this.button3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button3.FlatAppearance.BorderSize = 0;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Font = new System.Drawing.Font("Bahnschrift SemiBold", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button3.ForeColor = System.Drawing.Color.LightGray;
+            this.button3.Location = new System.Drawing.Point(346, 250);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(146, 42);
+            this.button3.TabIndex = 9;
+            this.button3.Text = "Transfer →";
+            this.button3.UseVisualStyleBackColor = false;
             // 
             // profileForm
             // 
@@ -353,6 +390,7 @@
             this.ForeColor = System.Drawing.Color.LightGray;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4);
+            this.MaximizeBox = false;
             this.Name = "profileForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
@@ -396,8 +434,10 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Panel newUserList;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label newUserPlaceholder;
         private System.Windows.Forms.Label sptClearAllSelections;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
     }
 }
 
