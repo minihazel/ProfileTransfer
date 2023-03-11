@@ -47,7 +47,10 @@ namespace ProfileTransfer
             }
             else
             {
-                isEasy = false;
+                MessageBox.Show("It appears that you haven\'t placed ProfileFusion in an SPT folder. Please do so and try again." +
+                    "\n\n" +
+                    "For instructions, please refer to the Workshop page.", "SPT installation not detected", MessageBoxButtons.OK);
+                Application.Exit();
             }
         }
 
@@ -55,11 +58,6 @@ namespace ProfileTransfer
         {
             if (isEasy)
             {
-                tabEasyMethod.Visible = true;
-                mainSeparator.Visible = true;
-
-                easyPanel.Visible = true;
-                MessageBox.Show(currentFolder);
                 listProfiles(currentFolder, true);
             }
         }
@@ -91,31 +89,47 @@ namespace ProfileTransfer
                 {
                     for (int i = 0; i < profiles.Length; i++)
                     {
-                        string activeProfile = Path.Combine(profilesFolder, profiles[i]);
-                        string readProfile = File.ReadAllText(activeProfile);
-                        JObject parseProfile = JObject.Parse(readProfile);
-                        string nickname = parseProfile["characters"]["pmc"]["Info"]["Nickname"].ToString();
-                        string level = parseProfile["characters"]["pmc"]["Info"]["Level"].ToString();
-                        string faction = parseProfile["characters"]["pmc"]["Info"]["Side"].ToString().ToUpper();
+                        try
+                        {
+                            string activeProfile = Path.Combine(profilesFolder, profiles[i]);
+                            string readProfile = File.ReadAllText(activeProfile);
+                            JObject parseProfile = JObject.Parse(readProfile);
+                            string nickname = parseProfile["characters"]["pmc"]["Info"]["Nickname"].ToString();
 
-                        Label profile = new Label();
-                        profile.Name = $"user{i}";
-                        profile.AutoSize = false;
-                        profile.Cursor = Cursors.Hand;
-                        profile.Location = new System.Drawing.Point(easyProfileUserPlaceholder.Location.X, easyProfileUserPlaceholder.Location.Y + (i * 27));
-                        profile.Size = new System.Drawing.Size(easyProfileUserPlaceholder.Size.Width, easyProfileUserPlaceholder.Size.Height);
-                        profile.BackColor = idleColor;
-                        profile.ForeColor = Color.DarkGray;
-                        profile.Font = new Font("Bahnschrift Light", 10, FontStyle.Regular);
-                        profile.Visible = true;
-                        profile.TextAlign = ContentAlignment.MiddleLeft;
-                        profile.MouseEnter += new EventHandler(originalProfile_MouseEnter);
-                        profile.MouseLeave += new EventHandler(originalProfile_MouseLeave);
-                        profile.MouseDown += new MouseEventHandler(originalProfile_MouseDown);
-                        profile.MouseUp += new MouseEventHandler(originalProfile_MouseUp);
+                            Label profile = new Label();
+                            profile.Name = $"user{i}";
+                            profile.AutoSize = false;
+                            profile.Cursor = Cursors.Hand;
+                            profile.Location = new System.Drawing.Point(easyProfileUserPlaceholder.Location.X, easyProfileUserPlaceholder.Location.Y + (i * 27));
+                            profile.Size = new System.Drawing.Size(easyProfileUserPlaceholder.Size.Width, easyProfileUserPlaceholder.Size.Height);
+                            profile.BackColor = idleColor;
+                            profile.ForeColor = Color.DarkGray;
+                            profile.Font = new Font("Bahnschrift Light", 10, FontStyle.Regular);
+                            profile.Visible = true;
+                            profile.TextAlign = ContentAlignment.MiddleLeft;
+                            profile.MouseEnter += new EventHandler(originalProfile_MouseEnter);
+                            profile.MouseLeave += new EventHandler(originalProfile_MouseLeave);
+                            profile.MouseDown += new MouseEventHandler(originalProfile_MouseDown);
+                            profile.MouseUp += new MouseEventHandler(originalProfile_MouseUp);
 
-                        profile.Text = $"{nickname}  (Level {level} | {faction})";
-                        easyProfileUserList.Controls.Add(profile);
+                            JArray areas = (JArray)parseProfile["characters"]["pmc"]["Hideout"]["Areas"];
+                            bool allConstructingFalse = areas.All(area => (bool)area["constructing"] == false);
+                            if (allConstructingFalse)
+                            {
+                                profile.Text = nickname;
+                            }
+                            else
+                            {
+                                profile.Text = $"{nickname} [Construction is in progress]";
+                            }
+                            easyProfileUserList.Controls.Add(profile);
+                            nameNewServer.Text = Path.GetFileName(serverPath);
+                        }
+                        catch (Exception ex)
+                        {
+
+                        }
+                        
                     }
                 }
             }
@@ -138,8 +152,8 @@ namespace ProfileTransfer
                         profile.Name = $"user{i}";
                         profile.AutoSize = false;
                         profile.Cursor = Cursors.Hand;
-                        profile.Location = new System.Drawing.Point(sptUserPlaceholder.Location.X, sptUserPlaceholder.Location.Y + (i * 27));
-                        profile.Size = new System.Drawing.Size(sptUserPlaceholder.Size.Width, sptUserPlaceholder.Size.Height);
+                        profile.Location = new System.Drawing.Point(panelFromPlaceholder.Location.X, panelFromPlaceholder.Location.Y + (i * 27));
+                        profile.Size = new System.Drawing.Size(panelFromPlaceholder.Size.Width, panelFromPlaceholder.Size.Height);
                         profile.BackColor = idleColor;
                         profile.ForeColor = Color.DarkGray;
                         profile.Font = new Font("Bahnschrift Light", 10, FontStyle.Regular);
@@ -151,7 +165,7 @@ namespace ProfileTransfer
                         profile.MouseUp += new MouseEventHandler(originalProfile_MouseUp);
 
                         profile.Text = $"{nickname}  (Level {level} | {faction})";
-                        sptUserList.Controls.Add(profile);
+                        panelFromList.Controls.Add(profile);
                     }
                 }
             }
@@ -212,7 +226,7 @@ namespace ProfileTransfer
 
         private void sptClearAllSelections_Click(object sender, EventArgs e)
         {
-            foreach (Control component in sptUserList.Controls)
+            foreach (Control component in panelFromList.Controls)
             {
                 if (component is Label)
                 {
@@ -230,10 +244,10 @@ namespace ProfileTransfer
         {
             watermarkPanel.Select();
 
-            advancedPanel.SendToBack();
-            easyPanel.BringToFront();
-            tabEasyMethod.ForeColor = Color.DodgerBlue;
-            tabAdvancedMethod.ForeColor = Color.LightGray;
+            panelTransferFreely.SendToBack();
+            panelTransferTo.BringToFront();
+            tabTransferTo.ForeColor = Color.DodgerBlue;
+            tabTransferFrom.ForeColor = Color.LightGray;
 
             //listProfiles(fullPath, true);
         }
@@ -242,10 +256,10 @@ namespace ProfileTransfer
         {
             watermarkPanel.Select();
 
-            easyPanel.SendToBack();
-            advancedPanel.BringToFront();
-            tabAdvancedMethod.ForeColor = Color.DodgerBlue;
-            tabEasyMethod.ForeColor = Color.LightGray;
+            panelTransferTo.SendToBack();
+            panelTransferFreely.BringToFront();
+            tabTransferFrom.ForeColor = Color.DodgerBlue;
+            tabTransferTo.ForeColor = Color.LightGray;
         }
 
         private void easyProfileClearAllSelections_Click(object sender, EventArgs e)
