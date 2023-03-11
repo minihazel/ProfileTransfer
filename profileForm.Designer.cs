@@ -35,10 +35,12 @@
             this.watermarkIcon = new System.Windows.Forms.PictureBox();
             this.watermarkTitle = new System.Windows.Forms.Label();
             this.panelFrom = new System.Windows.Forms.Panel();
+            this.panelFromLocation = new System.Windows.Forms.Label();
+            this.panelFromBrowse = new System.Windows.Forms.Button();
             this.panelFromClear = new System.Windows.Forms.Label();
             this.panelFromList = new System.Windows.Forms.Panel();
             this.panelFromPlaceholder = new System.Windows.Forms.Label();
-            this.panelFromLocation = new System.Windows.Forms.Label();
+            this.panelFromLocationTitle = new System.Windows.Forms.Label();
             this.panelFromTitle = new System.Windows.Forms.Label();
             this.panelNewServer = new System.Windows.Forms.Panel();
             this.currentCompatibility = new System.Windows.Forms.Label();
@@ -46,26 +48,28 @@
             this.btnBrowseNew = new System.Windows.Forms.Button();
             this.nameNewServer = new System.Windows.Forms.Label();
             this.panelTransferFreely = new System.Windows.Forms.Panel();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.transferRight = new System.Windows.Forms.Button();
+            this.transferLeft = new System.Windows.Forms.Button();
             this.panelTo = new System.Windows.Forms.Panel();
+            this.panelToLocation = new System.Windows.Forms.Label();
+            this.panelToClear = new System.Windows.Forms.Label();
             this.panelToList = new System.Windows.Forms.Panel();
             this.panelToPlaceholder = new System.Windows.Forms.Label();
-            this.panelToLocation = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.panelToLocationTitle = new System.Windows.Forms.Label();
+            this.panelToBrowse = new System.Windows.Forms.Button();
             this.panelToTitle = new System.Windows.Forms.Label();
             this.tabTransferTo = new System.Windows.Forms.Button();
             this.tabTransferFrom = new System.Windows.Forms.Button();
             this.panelTransferTo = new System.Windows.Forms.Panel();
+            this.panelNewOptions = new System.Windows.Forms.Panel();
+            this.newOptionsWarning = new System.Windows.Forms.Label();
+            this.newOptionsTransfer = new System.Windows.Forms.Button();
             this.easyProfilePanel = new System.Windows.Forms.Panel();
             this.easyProfileClearAllSelections = new System.Windows.Forms.Label();
             this.easyProfileUserList = new System.Windows.Forms.Panel();
             this.easyProfileUserPlaceholder = new System.Windows.Forms.Label();
             this.easyProfileLocation = new System.Windows.Forms.Label();
             this.easyProfileTitle = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.button4 = new System.Windows.Forms.Button();
-            this.panelToClear = new System.Windows.Forms.Label();
             this.constructionTimer = new System.Windows.Forms.Timer(this.components);
             this.watermarkPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.watermarkIcon)).BeginInit();
@@ -76,6 +80,7 @@
             this.panelTo.SuspendLayout();
             this.panelToList.SuspendLayout();
             this.panelTransferTo.SuspendLayout();
+            this.panelNewOptions.SuspendLayout();
             this.easyProfilePanel.SuspendLayout();
             this.easyProfileUserList.SuspendLayout();
             this.SuspendLayout();
@@ -126,15 +131,42 @@
             // 
             // panelFrom
             // 
-            this.panelFrom.Controls.Add(this.button4);
+            this.panelFrom.Controls.Add(this.panelFromLocation);
+            this.panelFrom.Controls.Add(this.panelFromBrowse);
             this.panelFrom.Controls.Add(this.panelFromClear);
             this.panelFrom.Controls.Add(this.panelFromList);
-            this.panelFrom.Controls.Add(this.panelFromLocation);
+            this.panelFrom.Controls.Add(this.panelFromLocationTitle);
             this.panelFrom.Controls.Add(this.panelFromTitle);
             this.panelFrom.Location = new System.Drawing.Point(0, 3);
             this.panelFrom.Name = "panelFrom";
             this.panelFrom.Size = new System.Drawing.Size(340, 387);
             this.panelFrom.TabIndex = 3;
+            // 
+            // panelFromLocation
+            // 
+            this.panelFromLocation.Font = new System.Drawing.Font("Bahnschrift Light", 8F);
+            this.panelFromLocation.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.panelFromLocation.Location = new System.Drawing.Point(51, 52);
+            this.panelFromLocation.Name = "panelFromLocation";
+            this.panelFromLocation.Size = new System.Drawing.Size(285, 34);
+            this.panelFromLocation.TabIndex = 9;
+            // 
+            // panelFromBrowse
+            // 
+            this.panelFromBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelFromBrowse.BackColor = System.Drawing.Color.DimGray;
+            this.panelFromBrowse.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.panelFromBrowse.FlatAppearance.BorderSize = 0;
+            this.panelFromBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.panelFromBrowse.Font = new System.Drawing.Font("Bahnschrift SemiBold", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.panelFromBrowse.ForeColor = System.Drawing.Color.LightGray;
+            this.panelFromBrowse.Location = new System.Drawing.Point(247, 6);
+            this.panelFromBrowse.Name = "panelFromBrowse";
+            this.panelFromBrowse.Size = new System.Drawing.Size(90, 42);
+            this.panelFromBrowse.TabIndex = 8;
+            this.panelFromBrowse.Text = "Find";
+            this.panelFromBrowse.UseVisualStyleBackColor = false;
+            this.panelFromBrowse.Click += new System.EventHandler(this.panelFromBrowse_Click);
             // 
             // panelFromClear
             // 
@@ -149,9 +181,12 @@
             this.panelFromClear.TabIndex = 7;
             this.panelFromClear.Text = "Clear all selections";
             this.panelFromClear.Click += new System.EventHandler(this.sptClearAllSelections_Click);
+            this.panelFromClear.MouseEnter += new System.EventHandler(this.panelFromClear_MouseEnter);
+            this.panelFromClear.MouseLeave += new System.EventHandler(this.panelFromClear_MouseLeave);
             // 
             // panelFromList
             // 
+            this.panelFromList.AllowDrop = true;
             this.panelFromList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -161,6 +196,8 @@
             this.panelFromList.Name = "panelFromList";
             this.panelFromList.Size = new System.Drawing.Size(334, 276);
             this.panelFromList.TabIndex = 6;
+            this.panelFromList.DragDrop += new System.Windows.Forms.DragEventHandler(this.panelFromList_DragDrop);
+            this.panelFromList.DragEnter += new System.Windows.Forms.DragEventHandler(this.panelFromList_DragEnter);
             // 
             // panelFromPlaceholder
             // 
@@ -177,16 +214,16 @@
             this.panelFromPlaceholder.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.panelFromPlaceholder.Visible = false;
             // 
-            // panelFromLocation
+            // panelFromLocationTitle
             // 
-            this.panelFromLocation.AutoSize = true;
-            this.panelFromLocation.Font = new System.Drawing.Font("Bahnschrift Light", 8F);
-            this.panelFromLocation.ForeColor = System.Drawing.Color.DarkGray;
-            this.panelFromLocation.Location = new System.Drawing.Point(3, 52);
-            this.panelFromLocation.Name = "panelFromLocation";
-            this.panelFromLocation.Size = new System.Drawing.Size(51, 13);
-            this.panelFromLocation.TabIndex = 5;
-            this.panelFromLocation.Text = "Location:";
+            this.panelFromLocationTitle.AutoSize = true;
+            this.panelFromLocationTitle.Font = new System.Drawing.Font("Bahnschrift Light", 8F);
+            this.panelFromLocationTitle.ForeColor = System.Drawing.Color.DarkGray;
+            this.panelFromLocationTitle.Location = new System.Drawing.Point(3, 52);
+            this.panelFromLocationTitle.Name = "panelFromLocationTitle";
+            this.panelFromLocationTitle.Size = new System.Drawing.Size(51, 13);
+            this.panelFromLocationTitle.TabIndex = 5;
+            this.panelFromLocationTitle.Text = "Location:";
             // 
             // panelFromTitle
             // 
@@ -195,9 +232,9 @@
             this.panelFromTitle.ForeColor = System.Drawing.Color.DarkGray;
             this.panelFromTitle.Location = new System.Drawing.Point(3, 18);
             this.panelFromTitle.Name = "panelFromTitle";
-            this.panelFromTitle.Size = new System.Drawing.Size(228, 17);
+            this.panelFromTitle.Size = new System.Drawing.Size(209, 17);
             this.panelFromTitle.TabIndex = 3;
-            this.panelFromTitle.Text = "Select SPT install to transfer from";
+            this.panelFromTitle.Text = "Select existing SPT installation";
             // 
             // panelNewServer
             // 
@@ -263,8 +300,8 @@
             // 
             // panelTransferFreely
             // 
-            this.panelTransferFreely.Controls.Add(this.button3);
-            this.panelTransferFreely.Controls.Add(this.button2);
+            this.panelTransferFreely.Controls.Add(this.transferRight);
+            this.panelTransferFreely.Controls.Add(this.transferLeft);
             this.panelTransferFreely.Controls.Add(this.panelTo);
             this.panelTransferFreely.Controls.Add(this.panelFrom);
             this.panelTransferFreely.Location = new System.Drawing.Point(46, 161);
@@ -272,53 +309,80 @@
             this.panelTransferFreely.Size = new System.Drawing.Size(838, 395);
             this.panelTransferFreely.TabIndex = 7;
             // 
-            // button3
+            // transferRight
             // 
-            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.BackColor = System.Drawing.Color.DimGray;
-            this.button3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("Bahnschrift SemiBold", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.ForeColor = System.Drawing.Color.LightGray;
-            this.button3.Location = new System.Drawing.Point(346, 250);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(146, 42);
-            this.button3.TabIndex = 9;
-            this.button3.Text = "Transfer →";
-            this.button3.UseVisualStyleBackColor = false;
+            this.transferRight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.transferRight.BackColor = System.Drawing.Color.DimGray;
+            this.transferRight.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.transferRight.FlatAppearance.BorderSize = 0;
+            this.transferRight.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.transferRight.Font = new System.Drawing.Font("Bahnschrift SemiBold", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.transferRight.ForeColor = System.Drawing.Color.LightGray;
+            this.transferRight.Location = new System.Drawing.Point(346, 202);
+            this.transferRight.Name = "transferRight";
+            this.transferRight.Size = new System.Drawing.Size(146, 42);
+            this.transferRight.TabIndex = 9;
+            this.transferRight.Text = "→ Transfer →";
+            this.transferRight.UseVisualStyleBackColor = false;
+            this.transferRight.Click += new System.EventHandler(this.transferRight_Click);
             // 
-            // button2
+            // transferLeft
             // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.BackColor = System.Drawing.Color.DimGray;
-            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Bahnschrift SemiBold", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.LightGray;
-            this.button2.Location = new System.Drawing.Point(346, 190);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(146, 42);
-            this.button2.TabIndex = 8;
-            this.button2.Text = "← Transfer";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.transferLeft.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.transferLeft.BackColor = System.Drawing.Color.DimGray;
+            this.transferLeft.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.transferLeft.FlatAppearance.BorderSize = 0;
+            this.transferLeft.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.transferLeft.Font = new System.Drawing.Font("Bahnschrift SemiBold", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.transferLeft.ForeColor = System.Drawing.Color.LightGray;
+            this.transferLeft.Location = new System.Drawing.Point(346, 260);
+            this.transferLeft.Name = "transferLeft";
+            this.transferLeft.Size = new System.Drawing.Size(146, 42);
+            this.transferLeft.TabIndex = 8;
+            this.transferLeft.Text = "← Transfer ←";
+            this.transferLeft.UseVisualStyleBackColor = false;
+            this.transferLeft.Click += new System.EventHandler(this.transferLeft_Click);
             // 
             // panelTo
             // 
+            this.panelTo.Controls.Add(this.panelToLocation);
             this.panelTo.Controls.Add(this.panelToClear);
             this.panelTo.Controls.Add(this.panelToList);
-            this.panelTo.Controls.Add(this.panelToLocation);
-            this.panelTo.Controls.Add(this.button1);
+            this.panelTo.Controls.Add(this.panelToLocationTitle);
+            this.panelTo.Controls.Add(this.panelToBrowse);
             this.panelTo.Controls.Add(this.panelToTitle);
             this.panelTo.Location = new System.Drawing.Point(498, 3);
             this.panelTo.Name = "panelTo";
             this.panelTo.Size = new System.Drawing.Size(340, 387);
             this.panelTo.TabIndex = 7;
             // 
+            // panelToLocation
+            // 
+            this.panelToLocation.Font = new System.Drawing.Font("Bahnschrift Light", 8F);
+            this.panelToLocation.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.panelToLocation.Location = new System.Drawing.Point(51, 52);
+            this.panelToLocation.Name = "panelToLocation";
+            this.panelToLocation.Size = new System.Drawing.Size(285, 34);
+            this.panelToLocation.TabIndex = 10;
+            // 
+            // panelToClear
+            // 
+            this.panelToClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelToClear.AutoSize = true;
+            this.panelToClear.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.panelToClear.Font = new System.Drawing.Font("Bahnschrift Light", 8F);
+            this.panelToClear.ForeColor = System.Drawing.Color.DarkGray;
+            this.panelToClear.Location = new System.Drawing.Point(234, 87);
+            this.panelToClear.Name = "panelToClear";
+            this.panelToClear.Size = new System.Drawing.Size(103, 13);
+            this.panelToClear.TabIndex = 10;
+            this.panelToClear.Text = "Clear all selections";
+            this.panelToClear.MouseEnter += new System.EventHandler(this.panelToClear_MouseEnter);
+            this.panelToClear.MouseLeave += new System.EventHandler(this.panelToClear_MouseLeave);
+            // 
             // panelToList
             // 
+            this.panelToList.AllowDrop = true;
             this.panelToList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -328,6 +392,8 @@
             this.panelToList.Name = "panelToList";
             this.panelToList.Size = new System.Drawing.Size(334, 276);
             this.panelToList.TabIndex = 7;
+            this.panelToList.DragDrop += new System.Windows.Forms.DragEventHandler(this.panelToList_DragDrop);
+            this.panelToList.DragEnter += new System.Windows.Forms.DragEventHandler(this.panelToList_DragEnter);
             // 
             // panelToPlaceholder
             // 
@@ -344,32 +410,33 @@
             this.panelToPlaceholder.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.panelToPlaceholder.Visible = false;
             // 
-            // panelToLocation
+            // panelToLocationTitle
             // 
-            this.panelToLocation.AutoSize = true;
-            this.panelToLocation.Font = new System.Drawing.Font("Bahnschrift Light", 8F);
-            this.panelToLocation.ForeColor = System.Drawing.Color.DarkGray;
-            this.panelToLocation.Location = new System.Drawing.Point(3, 52);
-            this.panelToLocation.Name = "panelToLocation";
-            this.panelToLocation.Size = new System.Drawing.Size(51, 13);
-            this.panelToLocation.TabIndex = 5;
-            this.panelToLocation.Text = "Location:";
+            this.panelToLocationTitle.AutoSize = true;
+            this.panelToLocationTitle.Font = new System.Drawing.Font("Bahnschrift Light", 8F);
+            this.panelToLocationTitle.ForeColor = System.Drawing.Color.DarkGray;
+            this.panelToLocationTitle.Location = new System.Drawing.Point(3, 52);
+            this.panelToLocationTitle.Name = "panelToLocationTitle";
+            this.panelToLocationTitle.Size = new System.Drawing.Size(51, 13);
+            this.panelToLocationTitle.TabIndex = 5;
+            this.panelToLocationTitle.Text = "Location:";
             // 
-            // button1
+            // panelToBrowse
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.BackColor = System.Drawing.Color.DimGray;
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Bahnschrift SemiBold", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.LightGray;
-            this.button1.Location = new System.Drawing.Point(247, 5);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(90, 42);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Find";
-            this.button1.UseVisualStyleBackColor = false;
+            this.panelToBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelToBrowse.BackColor = System.Drawing.Color.DimGray;
+            this.panelToBrowse.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.panelToBrowse.FlatAppearance.BorderSize = 0;
+            this.panelToBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.panelToBrowse.Font = new System.Drawing.Font("Bahnschrift SemiBold", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.panelToBrowse.ForeColor = System.Drawing.Color.LightGray;
+            this.panelToBrowse.Location = new System.Drawing.Point(247, 6);
+            this.panelToBrowse.Name = "panelToBrowse";
+            this.panelToBrowse.Size = new System.Drawing.Size(90, 42);
+            this.panelToBrowse.TabIndex = 2;
+            this.panelToBrowse.Text = "Find";
+            this.panelToBrowse.UseVisualStyleBackColor = false;
+            this.panelToBrowse.Click += new System.EventHandler(this.panelToBrowse_Click);
             // 
             // panelToTitle
             // 
@@ -378,9 +445,9 @@
             this.panelToTitle.ForeColor = System.Drawing.Color.DarkGray;
             this.panelToTitle.Location = new System.Drawing.Point(3, 17);
             this.panelToTitle.Name = "panelToTitle";
-            this.panelToTitle.Size = new System.Drawing.Size(211, 17);
+            this.panelToTitle.Size = new System.Drawing.Size(209, 17);
             this.panelToTitle.TabIndex = 3;
-            this.panelToTitle.Text = "Select SPT install to transfer to";
+            this.panelToTitle.Text = "Select existing SPT installation";
             // 
             // tabTransferTo
             // 
@@ -392,13 +459,14 @@
             this.tabTransferTo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(55)))));
             this.tabTransferTo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.tabTransferTo.Font = new System.Drawing.Font("Bahnschrift SemiBold", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabTransferTo.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.tabTransferTo.Location = new System.Drawing.Point(607, 49);
+            this.tabTransferTo.ForeColor = System.Drawing.Color.LightGray;
+            this.tabTransferTo.Location = new System.Drawing.Point(890, 506);
             this.tabTransferTo.Name = "tabTransferTo";
-            this.tabTransferTo.Size = new System.Drawing.Size(277, 42);
+            this.tabTransferTo.Size = new System.Drawing.Size(20, 42);
             this.tabTransferTo.TabIndex = 8;
             this.tabTransferTo.Text = "Transfer from existing install";
             this.tabTransferTo.UseVisualStyleBackColor = false;
+            this.tabTransferTo.Visible = false;
             this.tabTransferTo.Click += new System.EventHandler(this.tabEasyMethod_Click);
             // 
             // tabTransferFrom
@@ -411,24 +479,57 @@
             this.tabTransferFrom.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(55)))));
             this.tabTransferFrom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.tabTransferFrom.Font = new System.Drawing.Font("Bahnschrift SemiBold", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabTransferFrom.ForeColor = System.Drawing.Color.LightGray;
-            this.tabTransferFrom.Location = new System.Drawing.Point(607, 99);
+            this.tabTransferFrom.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.tabTransferFrom.Location = new System.Drawing.Point(607, 49);
             this.tabTransferFrom.Name = "tabTransferFrom";
             this.tabTransferFrom.Size = new System.Drawing.Size(277, 42);
             this.tabTransferFrom.TabIndex = 9;
-            this.tabTransferFrom.Text = "Transfer freely";
+            this.tabTransferFrom.Text = "Transfer profiles from and to";
             this.tabTransferFrom.UseVisualStyleBackColor = false;
             this.tabTransferFrom.Click += new System.EventHandler(this.tabAdvancedMethod_Click);
             // 
             // panelTransferTo
             // 
-            this.panelTransferTo.Controls.Add(this.panel1);
+            this.panelTransferTo.Controls.Add(this.panelNewOptions);
             this.panelTransferTo.Controls.Add(this.easyProfilePanel);
             this.panelTransferTo.Controls.Add(this.panelNewServer);
             this.panelTransferTo.Location = new System.Drawing.Point(46, 161);
             this.panelTransferTo.Name = "panelTransferTo";
             this.panelTransferTo.Size = new System.Drawing.Size(838, 395);
             this.panelTransferTo.TabIndex = 10;
+            // 
+            // panelNewOptions
+            // 
+            this.panelNewOptions.Controls.Add(this.newOptionsWarning);
+            this.panelNewOptions.Controls.Add(this.newOptionsTransfer);
+            this.panelNewOptions.Location = new System.Drawing.Point(424, 111);
+            this.panelNewOptions.Name = "panelNewOptions";
+            this.panelNewOptions.Size = new System.Drawing.Size(414, 279);
+            this.panelNewOptions.TabIndex = 7;
+            this.panelNewOptions.Visible = false;
+            // 
+            // newOptionsWarning
+            // 
+            this.newOptionsWarning.Location = new System.Drawing.Point(6, 54);
+            this.newOptionsWarning.Name = "newOptionsWarning";
+            this.newOptionsWarning.Size = new System.Drawing.Size(404, 212);
+            this.newOptionsWarning.TabIndex = 0;
+            // 
+            // newOptionsTransfer
+            // 
+            this.newOptionsTransfer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.newOptionsTransfer.BackColor = System.Drawing.Color.DimGray;
+            this.newOptionsTransfer.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.newOptionsTransfer.FlatAppearance.BorderSize = 0;
+            this.newOptionsTransfer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.newOptionsTransfer.Font = new System.Drawing.Font("Bahnschrift SemiBold", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.newOptionsTransfer.ForeColor = System.Drawing.Color.LightGray;
+            this.newOptionsTransfer.Location = new System.Drawing.Point(6, 0);
+            this.newOptionsTransfer.Name = "newOptionsTransfer";
+            this.newOptionsTransfer.Size = new System.Drawing.Size(408, 42);
+            this.newOptionsTransfer.TabIndex = 3;
+            this.newOptionsTransfer.Text = "Transfer profile →";
+            this.newOptionsTransfer.UseVisualStyleBackColor = false;
             // 
             // easyProfilePanel
             // 
@@ -504,44 +605,13 @@
             this.easyProfileTitle.TabIndex = 3;
             this.easyProfileTitle.Text = "Select the profile(s) you want to transfer";
             // 
-            // panel1
+            // constructionTimer
             // 
-            this.panel1.Location = new System.Drawing.Point(423, 112);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(415, 278);
-            this.panel1.TabIndex = 7;
-            // 
-            // button4
-            // 
-            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button4.BackColor = System.Drawing.Color.DimGray;
-            this.button4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button4.FlatAppearance.BorderSize = 0;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Font = new System.Drawing.Font("Bahnschrift SemiBold", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.ForeColor = System.Drawing.Color.LightGray;
-            this.button4.Location = new System.Drawing.Point(247, 5);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(90, 42);
-            this.button4.TabIndex = 8;
-            this.button4.Text = "Find";
-            this.button4.UseVisualStyleBackColor = false;
-            // 
-            // panelToClear
-            // 
-            this.panelToClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelToClear.AutoSize = true;
-            this.panelToClear.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.panelToClear.Font = new System.Drawing.Font("Bahnschrift Light", 8F);
-            this.panelToClear.ForeColor = System.Drawing.Color.DarkGray;
-            this.panelToClear.Location = new System.Drawing.Point(234, 87);
-            this.panelToClear.Name = "panelToClear";
-            this.panelToClear.Size = new System.Drawing.Size(103, 13);
-            this.panelToClear.TabIndex = 10;
-            this.panelToClear.Text = "Clear all selections";
+            this.constructionTimer.Tick += new System.EventHandler(this.constructionTimer_Tick);
             // 
             // profileForm
             // 
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(40)))));
@@ -549,8 +619,8 @@
             this.Controls.Add(this.tabTransferFrom);
             this.Controls.Add(this.tabTransferTo);
             this.Controls.Add(this.watermarkPanel);
-            this.Controls.Add(this.panelTransferTo);
             this.Controls.Add(this.panelTransferFreely);
+            this.Controls.Add(this.panelTransferTo);
             this.Font = new System.Drawing.Font("Bahnschrift", 10F);
             this.ForeColor = System.Drawing.Color.LightGray;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -559,7 +629,11 @@
             this.Name = "profileForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.profileForm_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.profileForm_FormClosed);
             this.Load += new System.EventHandler(this.profileForm_Load);
+            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.profileForm_DragDrop);
+            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.profileForm_DragEnter);
             this.watermarkPanel.ResumeLayout(false);
             this.watermarkPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.watermarkIcon)).EndInit();
@@ -573,6 +647,7 @@
             this.panelTo.PerformLayout();
             this.panelToList.ResumeLayout(false);
             this.panelTransferTo.ResumeLayout(false);
+            this.panelNewOptions.ResumeLayout(false);
             this.easyProfilePanel.ResumeLayout(false);
             this.easyProfilePanel.PerformLayout();
             this.easyProfileUserList.ResumeLayout(false);
@@ -582,43 +657,47 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel watermarkPanel;
-        private System.Windows.Forms.Label watermarkCompatibility;
-        private System.Windows.Forms.PictureBox watermarkIcon;
-        private System.Windows.Forms.Label watermarkTitle;
-        private System.Windows.Forms.Panel panelFrom;
-        private System.Windows.Forms.Label panelFromLocation;
-        private System.Windows.Forms.Label panelFromTitle;
-        private System.Windows.Forms.Panel panelNewServer;
-        private System.Windows.Forms.Label currentLocation;
-        private System.Windows.Forms.Button btnBrowseNew;
-        private System.Windows.Forms.Label nameNewServer;
-        private System.Windows.Forms.Panel panelFromList;
-        private System.Windows.Forms.Label currentCompatibility;
-        private System.Windows.Forms.Panel panelTransferFreely;
-        private System.Windows.Forms.Label panelFromPlaceholder;
-        private System.Windows.Forms.Panel panelTo;
-        private System.Windows.Forms.Label panelToLocation;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label panelToTitle;
-        private System.Windows.Forms.Panel panelToList;
-        private System.Windows.Forms.Label panelToPlaceholder;
-        private System.Windows.Forms.Label panelFromClear;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button tabTransferTo;
-        private System.Windows.Forms.Button tabTransferFrom;
-        private System.Windows.Forms.Panel panelTransferTo;
-        private System.Windows.Forms.Panel easyProfilePanel;
-        private System.Windows.Forms.Label easyProfileClearAllSelections;
-        private System.Windows.Forms.Panel easyProfileUserList;
-        private System.Windows.Forms.Label easyProfileUserPlaceholder;
-        private System.Windows.Forms.Label easyProfileLocation;
-        private System.Windows.Forms.Label easyProfileTitle;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Label panelToClear;
-        private System.Windows.Forms.Timer constructionTimer;
+        public System.Windows.Forms.Panel watermarkPanel;
+        public System.Windows.Forms.Label watermarkCompatibility;
+        public System.Windows.Forms.PictureBox watermarkIcon;
+        public System.Windows.Forms.Label watermarkTitle;
+        public System.Windows.Forms.Label panelFromLocationTitle;
+        public System.Windows.Forms.Label panelFromTitle;
+        public System.Windows.Forms.Panel panelNewServer;
+        public System.Windows.Forms.Label currentLocation;
+        public System.Windows.Forms.Button btnBrowseNew;
+        public System.Windows.Forms.Label nameNewServer;
+        public System.Windows.Forms.Panel panelFromList;
+        public System.Windows.Forms.Label currentCompatibility;
+        public System.Windows.Forms.Panel panelTransferFreely;
+        public System.Windows.Forms.Label panelFromPlaceholder;
+        public System.Windows.Forms.Panel panelTo;
+        public System.Windows.Forms.Label panelToLocationTitle;
+        public System.Windows.Forms.Button panelToBrowse;
+        public System.Windows.Forms.Label panelToTitle;
+        public System.Windows.Forms.Panel panelToList;
+        public System.Windows.Forms.Label panelToPlaceholder;
+        public System.Windows.Forms.Label panelFromClear;
+        public System.Windows.Forms.Button transferLeft;
+        public System.Windows.Forms.Button transferRight;
+        public System.Windows.Forms.Button tabTransferTo;
+        public System.Windows.Forms.Button tabTransferFrom;
+        public System.Windows.Forms.Panel panelTransferTo;
+        public System.Windows.Forms.Panel easyProfilePanel;
+        public System.Windows.Forms.Label easyProfileClearAllSelections;
+        public System.Windows.Forms.Panel easyProfileUserList;
+        public System.Windows.Forms.Label easyProfileUserPlaceholder;
+        public System.Windows.Forms.Label easyProfileLocation;
+        public System.Windows.Forms.Label easyProfileTitle;
+        public System.Windows.Forms.Panel panelNewOptions;
+        public System.Windows.Forms.Button panelFromBrowse;
+        public System.Windows.Forms.Label panelToClear;
+        public System.Windows.Forms.Button newOptionsTransfer;
+        public System.Windows.Forms.Label newOptionsWarning;
+        public System.Windows.Forms.Timer constructionTimer;
+        public System.Windows.Forms.Label panelFromLocation;
+        public System.Windows.Forms.Label panelToLocation;
+        public System.Windows.Forms.Panel panelFrom;
     }
 }
 
