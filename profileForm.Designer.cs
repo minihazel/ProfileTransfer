@@ -189,7 +189,7 @@
             this.panelToTitle.AutoSize = true;
             this.panelToTitle.Font = new System.Drawing.Font("Bahnschrift Light", 10F);
             this.panelToTitle.ForeColor = System.Drawing.Color.DarkGray;
-            this.panelToTitle.Location = new System.Drawing.Point(525, 70);
+            this.panelToTitle.Location = new System.Drawing.Point(525, 76);
             this.panelToTitle.Name = "panelToTitle";
             this.panelToTitle.Size = new System.Drawing.Size(97, 17);
             this.panelToTitle.TabIndex = 3;
@@ -202,11 +202,11 @@
             this.panelClearAllProfiles.Cursor = System.Windows.Forms.Cursors.Hand;
             this.panelClearAllProfiles.Font = new System.Drawing.Font("Bahnschrift Light", 8F);
             this.panelClearAllProfiles.ForeColor = System.Drawing.Color.DarkGray;
-            this.panelClearAllProfiles.Location = new System.Drawing.Point(742, 87);
+            this.panelClearAllProfiles.Location = new System.Drawing.Point(709, 80);
             this.panelClearAllProfiles.Name = "panelClearAllProfiles";
-            this.panelClearAllProfiles.Size = new System.Drawing.Size(90, 13);
+            this.panelClearAllProfiles.Size = new System.Drawing.Size(125, 13);
             this.panelClearAllProfiles.TabIndex = 7;
-            this.panelClearAllProfiles.Text = "Clear all profiles";
+            this.panelClearAllProfiles.Text = "Clear the list of profiles";
             this.panelClearAllProfiles.Click += new System.EventHandler(this.sptClearAllSelections_Click);
             this.panelClearAllProfiles.MouseEnter += new System.EventHandler(this.panelFromClear_MouseEnter);
             this.panelClearAllProfiles.MouseLeave += new System.EventHandler(this.panelFromClear_MouseLeave);
@@ -257,7 +257,7 @@
             this.panelFromTitle.AutoSize = true;
             this.panelFromTitle.Font = new System.Drawing.Font("Bahnschrift Light", 10F);
             this.panelFromTitle.ForeColor = System.Drawing.Color.DarkGray;
-            this.panelFromTitle.Location = new System.Drawing.Point(1, 67);
+            this.panelFromTitle.Location = new System.Drawing.Point(1, 76);
             this.panelFromTitle.Name = "panelFromTitle";
             this.panelFromTitle.Size = new System.Drawing.Size(405, 17);
             this.panelFromTitle.TabIndex = 3;

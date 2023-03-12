@@ -1084,10 +1084,10 @@ namespace ProfileTransfer
             string[] items = (string[])e.Data.GetData(DataFormats.FileDrop);
             if (items.Length > 0)
             {
-                FileAttributes attr = File.GetAttributes(items[0]);
-                if ((attr & FileAttributes.Directory) != FileAttributes.Directory)
+                foreach (string profile in items)
                 {
-                    foreach (string profile in items)
+                    FileAttributes attr = File.GetAttributes(profile);
+                    if ((attr & FileAttributes.Directory) != FileAttributes.Directory)
                     {
                         if (profile.Contains(serverLocation.Text))
                         {
@@ -1100,24 +1100,29 @@ namespace ProfileTransfer
                         string path = Path.GetFullPath(profile);
                         arr.Add(path);
                     }
+                    else
+                    {
+                        if (Path.GetFileName(profile) == "profiles")
+                        {
+                            if (profile.Contains(serverLocation.Text))
+                            {
+                                MessageBox.Show("You cannot transfer profiles to the same folder." +
+                                    "\n\n" +
+                                    "Please get profiles from another SPT installation and try again.", "ProfileFusion", MessageBoxButtons.OK);
+                                break;
+                            }
+                            else
+                            {
+                                string[] files = Directory.GetFiles(profile);
+                                foreach (string file in files)
+                                {
+                                    string path = Path.GetFullPath(file);
+                                    arr.Add(path);
+                                }
+                            }
+                        }
+                    }
                 }
-                /*
-                else
-                {
-                    clearLeftUI();
-
-                    string fullPath = items[0];
-                    panelFromLocation.Text = fullPath;
-                    fromFolder = fullPath;
-
-                    listProfiles(fromFolder, true);
-                    constructionTimer.Start();
-                }
-                */
-            }
-            else
-            {
-                MessageBox.Show("Please only drag-and-drop one folder at a time.", "ProfileFusion", MessageBoxButtons.OK);
             }
 
             if (arr.Count > 0)
