@@ -17,6 +17,7 @@ namespace ProfileTransfer
 {
     public partial class profileForm : Form
     {
+
         public Color idleColor = Color.FromArgb(255, 35, 35, 40);
         public Color hoverColor = Color.FromArgb(255, 40, 40, 50);
         public Color selectColor = Color.FromArgb(255, 50, 50, 60);
@@ -36,7 +37,7 @@ namespace ProfileTransfer
         {
             string currentDir = Environment.CurrentDirectory;
             constructionTimer.Start();
-
+            
             /*
             string akiServer = Path.Combine(currentDir, "Aki.Server.exe");
             string akiLauncher = Path.Combine(currentDir, "Aki.Launcher.exe");
@@ -130,7 +131,7 @@ namespace ProfileTransfer
                             {
                                 profile.Text = $"{nickname} [Construction in progress]";
                             }
-                            panelFromList.Controls.Add(profile);
+                            panelProfilesList.Controls.Add(profile);
                             // nameNewServer.Text = Path.GetFileName(serverPath);
                         }
                         catch (Exception ex)
@@ -159,8 +160,8 @@ namespace ProfileTransfer
                         profile.Name = $"user{i}";
                         profile.AutoSize = false;
                         profile.Cursor = Cursors.Hand;
-                        profile.Location = new System.Drawing.Point(panelFromPlaceholder.Location.X, panelFromPlaceholder.Location.Y + (i * 27));
-                        profile.Size = new System.Drawing.Size(panelFromPlaceholder.Size.Width, panelFromPlaceholder.Size.Height);
+                        profile.Location = new System.Drawing.Point(panelProfilesPlaceholder.Location.X, panelProfilesPlaceholder.Location.Y + (i * 27));
+                        profile.Size = new System.Drawing.Size(panelProfilesPlaceholder.Size.Width, panelProfilesPlaceholder.Size.Height);
                         profile.BackColor = idleColor;
                         profile.ForeColor = Color.DarkGray;
                         profile.Font = new Font("Bahnschrift Light", 10, FontStyle.Regular);
@@ -172,7 +173,7 @@ namespace ProfileTransfer
                         profile.MouseUp += new MouseEventHandler(originalProfile_MouseUp);
 
                         profile.Text = nickname;
-                        panelToList.Controls.Add(profile);
+                        panelProfileNamesList.Controls.Add(profile);
                     }
                 }
             }
@@ -233,7 +234,7 @@ namespace ProfileTransfer
 
         private void sptClearAllSelections_Click(object sender, EventArgs e)
         {
-            foreach (Control component in panelFromList.Controls)
+            foreach (Control component in panelProfilesList.Controls)
             {
                 if (component is Label)
                 {
@@ -281,7 +282,7 @@ namespace ProfileTransfer
             {
                 // From panel
                 List<string> fromProfiles = new List<string>();
-                foreach (Control component in panelFromList.Controls)
+                foreach (Control component in panelProfilesList.Controls)
                 {
                     if (component is Label && component.BackColor == selectColor && component.Text.ToLower().Contains("construction in progress"))
                     {
@@ -295,27 +296,6 @@ namespace ProfileTransfer
                 else if (fromProfiles.Count == 0)
                 {
                     transferRight.Enabled = true;
-                }
-            }
-
-            if (panelToLocation.Text != "")
-            {
-                // To panel
-                List<string> toProfiles = new List<string>();
-                foreach (Control component in panelToList.Controls)
-                {
-                    if (component is Label && component.BackColor == selectColor && component.Text.ToLower().Contains("construction in progress"))
-                    {
-                        toProfiles.Add($"- {component.Text.Replace(" [Construction in progress]", "")}");
-                    }
-                }
-                if (toProfiles.Count > 0)
-                {
-                    transferLeft.Enabled = false;
-                }
-                else if (toProfiles.Count == 0)
-                {
-                    transferLeft.Enabled = true;
                 }
             }
 
@@ -370,6 +350,7 @@ namespace ProfileTransfer
 
         private void panelToBrowse_Click(object sender, EventArgs e)
         {
+            /*
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.ValidateNames = false;
             ofd.CheckFileExists = false;
@@ -384,9 +365,8 @@ namespace ProfileTransfer
 
                 listProfiles(toFolder, false);
                 constructionTimer.Start();
-                // panelNewOptions.Visible = true;
-                // showOptions();
             }
+            */
         }
 
         private void panelFromClear_MouseEnter(object sender, EventArgs e)
@@ -399,26 +379,16 @@ namespace ProfileTransfer
             panelFromClear.ForeColor = Color.LightGray;
         }
 
-        private void panelToClear_MouseEnter(object sender, EventArgs e)
-        {
-            panelToClear.ForeColor = Color.DodgerBlue;
-        }
-
-        private void panelToClear_MouseLeave(object sender, EventArgs e)
-        {
-            panelToClear.ForeColor = Color.LightGray;
-        }
-
         public void clearLeftUI()
         {
-            for (int i = panelFromList.Controls.Count - 1; i >= 0; i--)
+            for (int i = panelProfilesList.Controls.Count - 1; i >= 0; i--)
             {
-                Label selected = panelFromList.Controls[i] as Label;
+                Label selected = panelProfilesList.Controls[i] as Label;
                 if (selected != null)
                 {
                     try
                     {
-                        panelFromList.Controls.RemoveAt(i);
+                        panelProfilesList.Controls.RemoveAt(i);
                         selected.Dispose();
                     }
                     catch (Exception err)
@@ -434,14 +404,14 @@ namespace ProfileTransfer
 
         public void clearRightUI()
         {
-            for (int i = panelToList.Controls.Count - 1; i >= 0; i--)
+            for (int i = panelProfileNamesList.Controls.Count - 1; i >= 0; i--)
             {
-                Label selected = panelToList.Controls[i] as Label;
+                Label selected = panelProfileNamesList.Controls[i] as Label;
                 if (selected != null)
                 {
                     try
                     {
-                        panelToList.Controls.RemoveAt(i);
+                        panelProfileNamesList.Controls.RemoveAt(i);
                         selected.Dispose();
                     }
                     catch (Exception err)
@@ -451,10 +421,9 @@ namespace ProfileTransfer
                     }
                 }
             }
-
-            panelToLocation.Text = "";
         }
 
+        /*
         public void TransferProfile(bool method)
         {
             // true = from
@@ -463,62 +432,74 @@ namespace ProfileTransfer
             if (method)
             {
                 int copies = 0;
+                int failedCopies = 0;
                 List<string> successfulCopies = new List<string>();
+                List<string> failedAttempts = new List<string>();
 
-                foreach (Control profile in panelFromList.Controls)
+                foreach (Control profile in panelProfiles.Controls)
                 {
                     if (profile is Label && profile.BackColor == selectColor)
                     {
                         if (!profile.Text.Contains("[Construction in progress]"))
                         {
-                            // From  ------
+
+                            string matchedName = "";
+                            string fromProfile = "";
+                            bool hasConflict = false;
+
                             string fromServer = panelFromLocation.Text;
                             string fromUserFolder = Path.Combine(fromServer, "user\\profiles");
-                            string fromProfile = Path.Combine(fromUserFolder, profile.Text);
-
-                            // reading From json
-                            string fromReadProfile = File.ReadAllText(fromProfile);
-                            JObject fromParseProfile = JObject.Parse(fromReadProfile);
-                            string fromNickname = fromParseProfile["characters"]["pmc"]["Info"]["Nickname"].ToString();
-
-                            // To    ------
-                            string toServer = panelFromLocation.Text;
-                            string toUserFolder = Path.Combine(fromServer, "user\\profiles");
-                            string toProfile = Path.Combine(toUserFolder, profile.Text);
-
-                            // reading To json
-                            string toReadProfile = File.ReadAllText(toProfile);
-                            JObject toParseProfile = JObject.Parse(toReadProfile);
-                            string toNickname = toParseProfile["characters"]["pmc"]["Info"]["Nickname"].ToString();
-
-                            bool containsProfile = Directory.GetFiles(toUserFolder, Path.GetFileName(fromProfile), SearchOption.TopDirectoryOnly).Any();
-
-                            if (!containsProfile)
+                            string[] fromProfiles = Directory.GetFiles(fromUserFolder);
+                            foreach (string p in fromProfiles)
                             {
-                                if (fromNickname != toNickname)
+                                string fromReadProfile = File.ReadAllText(p);
+                                JObject fromParseProfile = JObject.Parse(fromReadProfile);
+                                string fromNickname = fromParseProfile["characters"]["pmc"]["Info"]["Nickname"].ToString();
+
+                                if (profile.Text == fromNickname)
                                 {
-                                    if (fromNickname == profile.Text)
-                                    {
-                                        try
-                                        {
-                                            string newProfile = Path.Combine(toUserFolder, Path.GetFileName(fromProfile));
-                                            File.Copy(fromProfile, newProfile);
-                                            successfulCopies.Add(profile.Text);
-                                            copies++;
-                                        }
-                                        catch (Exception ex)
-                                        {
-                                            Debug.WriteLine($"ERROR: {ex}");
-                                            MessageBox.Show($"Oops! It seems like we received an error. If you're uncertain what it\'s about, please message the developer with a screenshot:\n\n{ex.Message.ToString()}", this.Text, MessageBoxButtons.OK);
-                                        }
-                                    }
+                                    matchedName = fromNickname;
+                                    fromProfile = Path.GetFullPath(p);
+                                    break;
                                 }
-                                else
+                            }
+
+
+
+                            string toServer = panelToLocation.Text;
+                            string toUserFolder = Path.Combine(toServer, "user\\profiles");
+                            string[] toProfiles = Directory.GetFiles(toUserFolder);
+                            foreach (string p in toProfiles)
+                            {
+                                string toReadProfile = File.ReadAllText(p);
+                                JObject toParseProfile = JObject.Parse(toReadProfile);
+                                string toNickname = toParseProfile["characters"]["pmc"]["Info"]["Nickname"].ToString();
+
+                                if (profile.Text == toNickname)
                                 {
-                                    MessageBox.Show("An identical profile cannot be copied." +
-                                        "\n" +
-                                        "\n" +
-                                        "Please un-select the identical profile and try again!", "ProfileFusion", MessageBoxButtons.OK);
+                                    hasConflict = true;
+                                    break;
+                                }
+                            }
+
+
+
+                            if (matchedName != "" && !hasConflict)
+                            {
+                                try
+                                {
+                                    string newProfile = Path.Combine(toUserFolder, Path.GetFileName(fromProfile));
+                                    File.Copy(fromProfile, newProfile);
+                                    successfulCopies.Add(profile.Text);
+                                    copies++;
+
+                                    clearRightUI();
+                                    listProfiles(toServer, false);
+                                }
+                                catch (Exception ex)
+                                {
+                                    Debug.WriteLine($"ERROR: {ex}");
+                                    MessageBox.Show($"Oops! It seems like we received an error. If you're uncertain what it\'s about, please message the developer with a screenshot:\n\n{ex.Message.ToString()}", this.Text, MessageBoxButtons.OK);
                                 }
                             }
                         }
@@ -551,62 +532,74 @@ namespace ProfileTransfer
             else
             {
                 int copies = 0;
+                int failedCopies = 0;
                 List<string> successfulCopies = new List<string>();
+                List<string> failedAttempts = new List<string>();
 
-                foreach (Control profile in panelToList.Controls)
+                foreach (Control profile in panelProfileNames.Controls)
                 {
                     if (profile is Label && profile.BackColor == selectColor)
                     {
                         if (!profile.Text.Contains("[Construction in progress]"))
                         {
-                            // From  ------
+
+                            string matchedName = "";
+                            string toProfile = "";
+                            bool hasConflict = false;
+
+                            string toServer = panelToLocation.Text;
+                            string toUserFolder = Path.Combine(toServer, "user\\profiles");
+                            string[] toProfiles = Directory.GetFiles(toUserFolder);
+                            foreach (string p in toProfiles)
+                            {
+                                string toReadProfile = File.ReadAllText(p);
+                                JObject toParseProfile = JObject.Parse(toReadProfile);
+                                string toNickname = toParseProfile["characters"]["pmc"]["Info"]["Nickname"].ToString();
+
+                                if (profile.Text == toNickname)
+                                {
+                                    matchedName = toNickname;
+                                    toProfile = Path.GetFullPath(p);
+                                }
+                            }
+
+
+
                             string fromServer = panelFromLocation.Text;
                             string fromUserFolder = Path.Combine(fromServer, "user\\profiles");
-                            string fromProfile = Path.Combine(fromUserFolder, profile.Text);
-
-                            // reading From json
-                            string fromReadProfile = File.ReadAllText(fromProfile);
-                            JObject fromParseProfile = JObject.Parse(fromReadProfile);
-                            string fromNickname = fromParseProfile["characters"]["pmc"]["Info"]["Nickname"].ToString();
-
-                            // To    ------
-                            string toServer = panelFromLocation.Text;
-                            string toUserFolder = Path.Combine(fromServer, "user\\profiles");
-                            string toProfile = Path.Combine(toUserFolder, profile.Text);
-
-                            // reading To json
-                            string toReadProfile = File.ReadAllText(toProfile);
-                            JObject toParseProfile = JObject.Parse(toReadProfile);
-                            string toNickname = toParseProfile["characters"]["pmc"]["Info"]["Nickname"].ToString();
-
-                            bool containsProfile = Directory.GetFiles(fromUserFolder, Path.GetFileName(fromProfile), SearchOption.TopDirectoryOnly).Any();
-
-                            if (!containsProfile)
+                            string[] fromProfiles = Directory.GetFiles(fromUserFolder);
+                            foreach (string p in fromProfiles)
                             {
-                                if (toNickname != fromNickname)
+                                string fromReadProfile = File.ReadAllText(p);
+                                JObject fromParseProfile = JObject.Parse(fromReadProfile);
+                                string fromNickname = fromParseProfile["characters"]["pmc"]["Info"]["Nickname"].ToString();
+
+                                if (profile.Text == fromNickname)
                                 {
-                                    if (toNickname == profile.Text)
-                                    {
-                                        try
-                                        {
-                                            string newProfile = Path.Combine(fromUserFolder, Path.GetFileName(toProfile));
-                                            File.Copy(toProfile, newProfile);
-                                            successfulCopies.Add(profile.Text);
-                                            copies++;
-                                        }
-                                        catch (Exception ex)
-                                        {
-                                            Debug.WriteLine($"ERROR: {ex}");
-                                            MessageBox.Show($"Oops! It seems like we received an error. If you're uncertain what it\'s about, please message the developer with a screenshot:\n\n{ex.Message.ToString()}", this.Text, MessageBoxButtons.OK);
-                                        }
-                                    }
+                                    hasConflict = true;
+                                    failedCopies++;
+                                    failedAttempts.Add(profile.Text);
                                 }
-                                else
+                            }
+
+
+
+                            if (matchedName != "" && failedCopies == 0)
+                            {
+                                try
                                 {
-                                    MessageBox.Show("An identical profile cannot be copied." +
-                                        "\n" +
-                                        "\n" +
-                                        "Please un-select the identical profile and try again!", "ProfileFusion", MessageBoxButtons.OK);
+                                    string newProfile = Path.Combine(toUserFolder, Path.GetFileName(toProfile));
+                                    File.Copy(toProfile, newProfile);
+                                    successfulCopies.Add(profile.Text);
+                                    copies++;
+
+                                    clearLeftUI();
+                                    listProfiles(fromServer, true);
+                                }
+                                catch (Exception ex)
+                                {
+                                    Debug.WriteLine($"ERROR: {ex}");
+                                    MessageBox.Show($"Oops! It seems like we received an error. If you're uncertain what it\'s about, please message the developer with a screenshot:\n\n{ex.Message.ToString()}", this.Text, MessageBoxButtons.OK);
                                 }
                             }
                         }
@@ -617,17 +610,25 @@ namespace ProfileTransfer
                     }
                 }
 
+                string message = "";
                 string result = string.Join("\n- ", successfulCopies);
 
-                if (copies == 1)
+                if (failedCopies > 0)
                 {
-                    string message = $"{copies} profile copied" +
+                    string failedResult = string.Join("\n- ", failedAttempts);
+                    message = $"{failedCopies} profiles failed to transfer" +
+                        $"\n" +
+                        $"{failedResult}";
+                }
+                else if (copies == 1)
+                {
+                    message = $"{copies} profile copied" +
                         $"\n" +
                         $"{result}";
                 }
                 else if (copies > 1)
                 {
-                    string message = $"{copies} profiles copied" +
+                    message = $"{copies} profiles copied" +
                         $"\n" +
                         $"{result}";
                 }
@@ -637,22 +638,24 @@ namespace ProfileTransfer
                 }
             }
         }
+        */
 
         private void transferRight_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Are you sure you want to transfer these profiles?", "ProfileFusion", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                TransferProfile(true);
+                //TransferProfile(true);
             }
         }
 
         private void transferLeft_Click(object sender, EventArgs e)
         {
-            TransferProfile(false);
+
         }
 
         private void profileForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            Properties.Settings.Default.Save();
             constructionTimer.Stop();
         }
 
@@ -679,20 +682,205 @@ namespace ProfileTransfer
             }
         }
 
-        private void panelFromList_DragDrop(object sender, DragEventArgs e)
+        public void insertProfiles(string[] profileArray)
         {
-            string[] items = (string[])e.Data.GetData(DataFormats.FileDrop);
-            if (items.Length > 1)
+            int numLabels = panelProfilesList.Controls.OfType<Label>().Count(lbl => lbl.Name.StartsWith("insertedProfile"));
+            int numLabels2 = panelProfileNamesList.Controls.OfType<Label>().Count(lbl => lbl.Name.StartsWith("insertedNickname"));
+
+            if (numLabels > 0)
             {
-                MessageBox.Show("Please only drag-and-drop one folder at a time.", "ProfileFusion", MessageBoxButtons.OK);
+                Label lastLabel = panelProfilesList.Controls.OfType<Label>()
+                    .Where(lbl => lbl.Name.StartsWith("insertedProfile"))
+                    .OrderByDescending(lbl => lbl.TabIndex)
+                    .First();
+
+                int plastLocationX = lastLabel.Location.X;
+                int plastLocationY = lastLabel.Location.Y;
+
+                Label p2lastLabel = panelProfileNamesList.Controls.OfType<Label>()
+                    .Where(lbl => lbl.Name.StartsWith("insertedNickname"))
+                    .OrderByDescending(lbl => lbl.TabIndex)
+                    .First();
+
+                int p2lastLocationX = p2lastLabel.Location.X;
+                int p2lastLocationY = p2lastLabel.Location.Y;
+
+
+                if (profileArray.Length > 0)
+                {
+                    for (int i = 0; i < profileArray.Length; i++)
+                    {
+                        try
+                        {
+                            bool activeProfile = File.Exists(profileArray[i]);
+
+                            if (activeProfile)
+                            {
+                                string readProfile = File.ReadAllText(profileArray[i]);
+                                JObject parseProfile = JObject.Parse(readProfile);
+
+                                string nickname = parseProfile["characters"]["pmc"]["Info"]["Nickname"].ToString();
+                                string faction = parseProfile["characters"]["pmc"]["Info"]["Side"].ToString();
+                                string level = parseProfile["characters"]["pmc"]["Info"]["Level"].ToString();
+                                string profilePath = profileArray[i];
+
+
+                                Label profile = new Label();
+                                profile.Name = $"insertedProfile{i}";
+                                profile.AutoSize = false;
+                                profile.Cursor = Cursors.Hand;
+                                profile.Location = new System.Drawing.Point(plastLocationX, plastLocationY + (i * 27));
+                                profile.Size = new System.Drawing.Size(lastLabel.Size.Width, lastLabel.Size.Height);
+                                profile.BackColor = idleColor;
+                                profile.ForeColor = Color.DarkGray;
+                                profile.Font = new Font("Bahnschrift Light", 8, FontStyle.Regular);
+                                profile.Visible = true;
+                                profile.TextAlign = ContentAlignment.MiddleLeft;
+                                profile.MouseEnter += new EventHandler(originalProfile_MouseEnter);
+                                profile.MouseLeave += new EventHandler(originalProfile_MouseLeave);
+                                profile.MouseDown += new MouseEventHandler(originalProfile_MouseDown);
+                                profile.MouseUp += new MouseEventHandler(originalProfile_MouseUp);
+                                profile.Text = profileArray[i];
+
+
+
+                                Label profileNickname = new Label();
+                                profileNickname.Name = $"insertedNickname{i}";
+                                profileNickname.AutoSize = false;
+                                profileNickname.Cursor = Cursors.Hand;
+                                profileNickname.Location = new System.Drawing.Point(p2lastLocationX, p2lastLocationY + (i * 27));
+                                profileNickname.Size = new System.Drawing.Size(p2lastLabel.Size.Width, p2lastLabel.Size.Height);
+                                profileNickname.BackColor = idleColor;
+                                profileNickname.ForeColor = Color.DarkGray;
+                                profileNickname.Font = new Font("Bahnschrift Light", 10, FontStyle.Regular);
+                                profileNickname.Visible = true;
+                                profileNickname.TextAlign = ContentAlignment.MiddleLeft;
+                                profileNickname.MouseEnter += new EventHandler(originalProfile_MouseEnter);
+                                profileNickname.MouseLeave += new EventHandler(originalProfile_MouseLeave);
+
+                                JArray areas = (JArray)parseProfile["characters"]["pmc"]["Hideout"]["Areas"];
+                                bool allConstructingFalse = areas.All(area => (bool)area["constructing"] == false);
+                                if (allConstructingFalse)
+                                {
+                                    profileNickname.Text = $"{nickname} [Level {level} | {faction}]";
+                                }
+                                else
+                                {
+                                    profileNickname.Text = $"{nickname} [Construction in progress]";
+                                }
+
+
+                                panelProfilesList.Controls.Add(profile);
+                                panelProfileNamesList.Controls.Add(profileNickname);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Debug.WriteLine($"ERROR: {ex}");
+                            MessageBox.Show($"Oops! It seems like we received an error. If you're uncertain what it\'s about, please message the developer with a screenshot:\n\n{ex.Message.ToString()}", this.Text, MessageBoxButtons.OK);
+                        }
+
+                    }
+                }
             }
             else
+            {
+                if (profileArray.Length > 0)
+                {
+                    for (int i = 0; i < profileArray.Length; i++)
+                    {
+                        try
+                        {
+                            bool activeProfile = File.Exists(profileArray[i]);
+
+                            if (activeProfile)
+                            {
+                                string readProfile = File.ReadAllText(profileArray[i]);
+                                JObject parseProfile = JObject.Parse(readProfile);
+
+                                string nickname = parseProfile["characters"]["pmc"]["Info"]["Nickname"].ToString();
+                                string faction = parseProfile["characters"]["pmc"]["Info"]["Side"].ToString();
+                                string level = parseProfile["characters"]["pmc"]["Info"]["Level"].ToString();
+                                string profilePath = profileArray[i];
+
+
+                                Label profile = new Label();
+                                profile.Name = $"insertedProfile{i}";
+                                profile.AutoSize = false;
+                                profile.Cursor = Cursors.Hand;
+                                profile.Location = new System.Drawing.Point(panelProfilesPlaceholder.Location.X, panelProfilesPlaceholder.Location.Y + (i * 27));
+                                profile.Size = new System.Drawing.Size(panelProfilesPlaceholder.Size.Width, panelProfilesPlaceholder.Size.Height);
+                                profile.BackColor = idleColor;
+                                profile.ForeColor = Color.DarkGray;
+                                profile.Font = new Font("Bahnschrift Light", 8, FontStyle.Regular);
+                                profile.Visible = true;
+                                profile.TextAlign = ContentAlignment.MiddleLeft;
+                                profile.MouseEnter += new EventHandler(originalProfile_MouseEnter);
+                                profile.MouseLeave += new EventHandler(originalProfile_MouseLeave);
+                                profile.MouseDown += new MouseEventHandler(originalProfile_MouseDown);
+                                profile.MouseUp += new MouseEventHandler(originalProfile_MouseUp);
+                                profile.Text = profileArray[i];
+
+
+
+                                Label profileNickname = new Label();
+                                profileNickname.Name = $"insertedNickname{i}";
+                                profileNickname.AutoSize = false;
+                                profileNickname.Cursor = Cursors.Hand;
+                                profileNickname.Location = new System.Drawing.Point(panelProfileNamesPlaceholder.Location.X, panelProfileNamesPlaceholder.Location.Y + (i * 27));
+                                profileNickname.Size = new System.Drawing.Size(panelProfileNamesPlaceholder.Size.Width, panelProfileNamesPlaceholder.Size.Height);
+                                profileNickname.BackColor = idleColor;
+                                profileNickname.ForeColor = Color.DarkGray;
+                                profileNickname.Font = new Font("Bahnschrift Light", 10, FontStyle.Regular);
+                                profileNickname.Visible = true;
+                                profileNickname.TextAlign = ContentAlignment.MiddleLeft;
+                                profileNickname.MouseEnter += new EventHandler(originalProfile_MouseEnter);
+                                profileNickname.MouseLeave += new EventHandler(originalProfile_MouseLeave);
+
+                                JArray areas = (JArray)parseProfile["characters"]["pmc"]["Hideout"]["Areas"];
+                                bool allConstructingFalse = areas.All(area => (bool)area["constructing"] == false);
+                                if (allConstructingFalse)
+                                {
+                                    profileNickname.Text = $"{nickname} [Level {level} | {faction}]";
+                                }
+                                else
+                                {
+                                    profileNickname.Text = $"{nickname} [Construction in progress]";
+                                }
+
+
+                                panelProfileNamesList.Controls.Add(profileNickname);
+                                panelProfilesList.Controls.Add(profile);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Debug.WriteLine($"ERROR: {ex}");
+                            MessageBox.Show($"Oops! It seems like we received an error. If you're uncertain what it\'s about, please message the developer with a screenshot:\n\n{ex.Message.ToString()}", this.Text, MessageBoxButtons.OK);
+                        }
+
+                    }
+                }
+            }
+        }
+
+        private void panelFromList_DragDrop(object sender, DragEventArgs e)
+        {
+            List<string> arr = new List<string>();
+
+            string[] items = (string[])e.Data.GetData(DataFormats.FileDrop);
+            if (items.Length > 0)
             {
                 FileAttributes attr = File.GetAttributes(items[0]);
                 if ((attr & FileAttributes.Directory) != FileAttributes.Directory)
                 {
-                    MessageBox.Show("Please only drag-and-drop SPT folders", "ProfileFusion", MessageBoxButtons.OK);
+                    foreach (string profile in items)
+                    {
+                        string path = Path.GetFullPath(profile);
+                        arr.Add(path);
+                    }
                 }
+                /*
                 else
                 {
                     clearLeftUI();
@@ -704,6 +892,17 @@ namespace ProfileTransfer
                     listProfiles(fromFolder, true);
                     constructionTimer.Start();
                 }
+                */
+            }
+            else
+            {
+                MessageBox.Show("Please only drag-and-drop one folder at a time.", "ProfileFusion", MessageBoxButtons.OK);
+            }
+
+            if (arr.Count > 0)
+            {
+                string[] profiles = arr.ToArray();
+                insertProfiles(profiles);
             }
         }
 
@@ -717,6 +916,7 @@ namespace ProfileTransfer
 
         private void panelToList_DragDrop(object sender, DragEventArgs e)
         {
+            /*
             string[] items = (string[])e.Data.GetData(DataFormats.FileDrop);
             if (items.Length > 1)
             {
@@ -741,6 +941,23 @@ namespace ProfileTransfer
                     constructionTimer.Start();
                 }
             }
+            */
         }
+
+        private void panelFromLocation_Click(object sender, EventArgs e)
+        {
+            if (panelFromLocation.Text.Length > 0)
+            {
+                if (Directory.Exists(panelFromLocation.Text))
+                {
+                    Process.Start("explorer.exe", panelFromLocation.Text);
+                }
+                else
+                {
+                    MessageBox.Show("It appears that we cannot find this folder. Check that the folder exists and try again.", "ProfileFusion", MessageBoxButtons.OK);
+                }
+            }
+        }
+
     }
 }
