@@ -35,11 +35,14 @@
             this.watermarkIcon = new System.Windows.Forms.PictureBox();
             this.watermarkTitle = new System.Windows.Forms.Label();
             this.panelProfiles = new System.Windows.Forms.Panel();
-            this.panelFromLocation = new System.Windows.Forms.Label();
-            this.panelFromClear = new System.Windows.Forms.Label();
+            this.panelProfileNamesList = new System.Windows.Forms.Panel();
+            this.panelProfileNamesPlaceholder = new System.Windows.Forms.Label();
+            this.serverLocation = new System.Windows.Forms.Label();
+            this.panelToTitle = new System.Windows.Forms.Label();
+            this.panelClearAllProfiles = new System.Windows.Forms.Label();
             this.panelProfilesList = new System.Windows.Forms.Panel();
             this.panelProfilesPlaceholder = new System.Windows.Forms.Label();
-            this.panelFromLocationTitle = new System.Windows.Forms.Label();
+            this.serverLocationTitle = new System.Windows.Forms.Label();
             this.panelFromTitle = new System.Windows.Forms.Label();
             this.panelFromBrowse = new System.Windows.Forms.Button();
             this.panelNewServer = new System.Windows.Forms.Panel();
@@ -47,10 +50,7 @@
             this.currentLocation = new System.Windows.Forms.Label();
             this.btnBrowseNew = new System.Windows.Forms.Button();
             this.nameNewServer = new System.Windows.Forms.Label();
-            this.panelProfileNamesList = new System.Windows.Forms.Panel();
-            this.panelProfileNamesPlaceholder = new System.Windows.Forms.Label();
-            this.panelToTitle = new System.Windows.Forms.Label();
-            this.transferRight = new System.Windows.Forms.Button();
+            this.transferAll = new System.Windows.Forms.Button();
             this.panelToBrowse = new System.Windows.Forms.Button();
             this.tabTransferTo = new System.Windows.Forms.Button();
             this.tabTransferFrom = new System.Windows.Forms.Button();
@@ -66,12 +66,15 @@
             this.easyProfileTitle = new System.Windows.Forms.Label();
             this.constructionTimer = new System.Windows.Forms.Timer(this.components);
             this.panelTransferFreely = new System.Windows.Forms.Panel();
+            this.panelClearSelected = new System.Windows.Forms.Label();
+            this.selectAllProfiles = new System.Windows.Forms.Button();
+            this.unSelectAll = new System.Windows.Forms.Button();
             this.watermarkPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.watermarkIcon)).BeginInit();
             this.panelProfiles.SuspendLayout();
+            this.panelProfileNamesList.SuspendLayout();
             this.panelProfilesList.SuspendLayout();
             this.panelNewServer.SuspendLayout();
-            this.panelProfileNamesList.SuspendLayout();
             this.panelTransferTo.SuspendLayout();
             this.panelNewOptions.SuspendLayout();
             this.easyProfilePanel.SuspendLayout();
@@ -125,45 +128,88 @@
             // 
             // panelProfiles
             // 
-            this.panelProfiles.Controls.Add(this.transferRight);
+            this.panelProfiles.Controls.Add(this.panelClearSelected);
             this.panelProfiles.Controls.Add(this.panelProfileNamesList);
-            this.panelProfiles.Controls.Add(this.panelFromLocation);
+            this.panelProfiles.Controls.Add(this.serverLocation);
             this.panelProfiles.Controls.Add(this.panelToTitle);
-            this.panelProfiles.Controls.Add(this.panelFromClear);
+            this.panelProfiles.Controls.Add(this.panelClearAllProfiles);
             this.panelProfiles.Controls.Add(this.panelProfilesList);
-            this.panelProfiles.Controls.Add(this.panelFromLocationTitle);
+            this.panelProfiles.Controls.Add(this.serverLocationTitle);
             this.panelProfiles.Controls.Add(this.panelFromTitle);
             this.panelProfiles.Location = new System.Drawing.Point(0, 3);
             this.panelProfiles.Name = "panelProfiles";
             this.panelProfiles.Size = new System.Drawing.Size(838, 421);
             this.panelProfiles.TabIndex = 3;
             // 
-            // panelFromLocation
+            // panelProfileNamesList
             // 
-            this.panelFromLocation.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.panelFromLocation.Font = new System.Drawing.Font("Bahnschrift Light", 8F);
-            this.panelFromLocation.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.panelFromLocation.Location = new System.Drawing.Point(48, 35);
-            this.panelFromLocation.Name = "panelFromLocation";
-            this.panelFromLocation.Size = new System.Drawing.Size(632, 18);
-            this.panelFromLocation.TabIndex = 9;
-            this.panelFromLocation.Click += new System.EventHandler(this.panelFromLocation_Click);
+            this.panelProfileNamesList.AllowDrop = true;
+            this.panelProfileNamesList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelProfileNamesList.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelProfileNamesList.Controls.Add(this.panelProfileNamesPlaceholder);
+            this.panelProfileNamesList.Location = new System.Drawing.Point(528, 108);
+            this.panelProfileNamesList.Name = "panelProfileNamesList";
+            this.panelProfileNamesList.Size = new System.Drawing.Size(304, 310);
+            this.panelProfileNamesList.TabIndex = 7;
+            this.panelProfileNamesList.DragDrop += new System.Windows.Forms.DragEventHandler(this.panelToList_DragDrop);
+            this.panelProfileNamesList.DragEnter += new System.Windows.Forms.DragEventHandler(this.panelToList_DragEnter);
             // 
-            // panelFromClear
+            // panelProfileNamesPlaceholder
             // 
-            this.panelFromClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelFromClear.AutoSize = true;
-            this.panelFromClear.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.panelFromClear.Font = new System.Drawing.Font("Bahnschrift Light", 8F);
-            this.panelFromClear.ForeColor = System.Drawing.Color.DarkGray;
-            this.panelFromClear.Location = new System.Drawing.Point(732, 87);
-            this.panelFromClear.Name = "panelFromClear";
-            this.panelFromClear.Size = new System.Drawing.Size(103, 13);
-            this.panelFromClear.TabIndex = 7;
-            this.panelFromClear.Text = "Clear all selections";
-            this.panelFromClear.Click += new System.EventHandler(this.sptClearAllSelections_Click);
-            this.panelFromClear.MouseEnter += new System.EventHandler(this.panelFromClear_MouseEnter);
-            this.panelFromClear.MouseLeave += new System.EventHandler(this.panelFromClear_MouseLeave);
+            this.panelProfileNamesPlaceholder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelProfileNamesPlaceholder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(55)))));
+            this.panelProfileNamesPlaceholder.Font = new System.Drawing.Font("Bahnschrift Light", 10F);
+            this.panelProfileNamesPlaceholder.ForeColor = System.Drawing.Color.DarkGray;
+            this.panelProfileNamesPlaceholder.Location = new System.Drawing.Point(0, 0);
+            this.panelProfileNamesPlaceholder.Name = "panelProfileNamesPlaceholder";
+            this.panelProfileNamesPlaceholder.Size = new System.Drawing.Size(302, 27);
+            this.panelProfileNamesPlaceholder.TabIndex = 4;
+            this.panelProfileNamesPlaceholder.Text = "dev_raccoon";
+            this.panelProfileNamesPlaceholder.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.panelProfileNamesPlaceholder.Visible = false;
+            // 
+            // serverLocation
+            // 
+            this.serverLocation.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.serverLocation.Font = new System.Drawing.Font("Bahnschrift Light", 8F);
+            this.serverLocation.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.serverLocation.Location = new System.Drawing.Point(103, 1);
+            this.serverLocation.Name = "serverLocation";
+            this.serverLocation.Size = new System.Drawing.Size(644, 18);
+            this.serverLocation.TabIndex = 9;
+            this.serverLocation.Click += new System.EventHandler(this.panelFromLocation_Click);
+            this.serverLocation.MouseEnter += new System.EventHandler(this.serverLocation_MouseEnter);
+            this.serverLocation.MouseLeave += new System.EventHandler(this.serverLocation_MouseLeave);
+            // 
+            // panelToTitle
+            // 
+            this.panelToTitle.AutoSize = true;
+            this.panelToTitle.Font = new System.Drawing.Font("Bahnschrift Light", 10F);
+            this.panelToTitle.ForeColor = System.Drawing.Color.DarkGray;
+            this.panelToTitle.Location = new System.Drawing.Point(525, 70);
+            this.panelToTitle.Name = "panelToTitle";
+            this.panelToTitle.Size = new System.Drawing.Size(97, 17);
+            this.panelToTitle.TabIndex = 3;
+            this.panelToTitle.Text = "Profile names";
+            // 
+            // panelClearAllProfiles
+            // 
+            this.panelClearAllProfiles.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelClearAllProfiles.AutoSize = true;
+            this.panelClearAllProfiles.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.panelClearAllProfiles.Font = new System.Drawing.Font("Bahnschrift Light", 8F);
+            this.panelClearAllProfiles.ForeColor = System.Drawing.Color.DarkGray;
+            this.panelClearAllProfiles.Location = new System.Drawing.Point(742, 87);
+            this.panelClearAllProfiles.Name = "panelClearAllProfiles";
+            this.panelClearAllProfiles.Size = new System.Drawing.Size(90, 13);
+            this.panelClearAllProfiles.TabIndex = 7;
+            this.panelClearAllProfiles.Text = "Clear all profiles";
+            this.panelClearAllProfiles.Click += new System.EventHandler(this.sptClearAllSelections_Click);
+            this.panelClearAllProfiles.MouseEnter += new System.EventHandler(this.panelFromClear_MouseEnter);
+            this.panelClearAllProfiles.MouseLeave += new System.EventHandler(this.panelFromClear_MouseLeave);
             // 
             // panelProfilesList
             // 
@@ -195,27 +241,27 @@
             this.panelProfilesPlaceholder.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.panelProfilesPlaceholder.Visible = false;
             // 
-            // panelFromLocationTitle
+            // serverLocationTitle
             // 
-            this.panelFromLocationTitle.AutoSize = true;
-            this.panelFromLocationTitle.Font = new System.Drawing.Font("Bahnschrift Light", 8F);
-            this.panelFromLocationTitle.ForeColor = System.Drawing.Color.DarkGray;
-            this.panelFromLocationTitle.Location = new System.Drawing.Point(0, 35);
-            this.panelFromLocationTitle.Name = "panelFromLocationTitle";
-            this.panelFromLocationTitle.Size = new System.Drawing.Size(51, 13);
-            this.panelFromLocationTitle.TabIndex = 5;
-            this.panelFromLocationTitle.Text = "Location:";
+            this.serverLocationTitle.AutoSize = true;
+            this.serverLocationTitle.Font = new System.Drawing.Font("Bahnschrift Light", 8F);
+            this.serverLocationTitle.ForeColor = System.Drawing.Color.DarkGray;
+            this.serverLocationTitle.Location = new System.Drawing.Point(1, 1);
+            this.serverLocationTitle.Name = "serverLocationTitle";
+            this.serverLocationTitle.Size = new System.Drawing.Size(96, 13);
+            this.serverLocationTitle.TabIndex = 5;
+            this.serverLocationTitle.Text = "Transfer Location:";
             // 
             // panelFromTitle
             // 
             this.panelFromTitle.AutoSize = true;
             this.panelFromTitle.Font = new System.Drawing.Font("Bahnschrift Light", 10F);
             this.panelFromTitle.ForeColor = System.Drawing.Color.DarkGray;
-            this.panelFromTitle.Location = new System.Drawing.Point(0, 70);
+            this.panelFromTitle.Location = new System.Drawing.Point(1, 67);
             this.panelFromTitle.Name = "panelFromTitle";
-            this.panelFromTitle.Size = new System.Drawing.Size(195, 17);
+            this.panelFromTitle.Size = new System.Drawing.Size(405, 17);
             this.panelFromTitle.TabIndex = 3;
-            this.panelFromTitle.Text = "Drag and drop profiles below";
+            this.panelFromTitle.Text = "Drag and drop profiles below, alternatively the \'profiles\' folder";
             // 
             // panelFromBrowse
             // 
@@ -232,6 +278,7 @@
             this.panelFromBrowse.TabIndex = 8;
             this.panelFromBrowse.Text = "Find";
             this.panelFromBrowse.UseVisualStyleBackColor = false;
+            this.panelFromBrowse.Visible = false;
             this.panelFromBrowse.Click += new System.EventHandler(this.panelFromBrowse_Click);
             // 
             // panelNewServer
@@ -296,63 +343,22 @@
             this.nameNewServer.TabIndex = 3;
             this.nameNewServer.Text = "Select the new server you want to transfer to";
             // 
-            // panelProfileNamesList
+            // transferAll
             // 
-            this.panelProfileNamesList.AllowDrop = true;
-            this.panelProfileNamesList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelProfileNamesList.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelProfileNamesList.Controls.Add(this.panelProfileNamesPlaceholder);
-            this.panelProfileNamesList.Location = new System.Drawing.Point(528, 108);
-            this.panelProfileNamesList.Name = "panelProfileNamesList";
-            this.panelProfileNamesList.Size = new System.Drawing.Size(304, 310);
-            this.panelProfileNamesList.TabIndex = 7;
-            this.panelProfileNamesList.DragDrop += new System.Windows.Forms.DragEventHandler(this.panelToList_DragDrop);
-            this.panelProfileNamesList.DragEnter += new System.Windows.Forms.DragEventHandler(this.panelToList_DragEnter);
-            // 
-            // panelProfileNamesPlaceholder
-            // 
-            this.panelProfileNamesPlaceholder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelProfileNamesPlaceholder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(55)))));
-            this.panelProfileNamesPlaceholder.Font = new System.Drawing.Font("Bahnschrift Light", 10F);
-            this.panelProfileNamesPlaceholder.ForeColor = System.Drawing.Color.DarkGray;
-            this.panelProfileNamesPlaceholder.Location = new System.Drawing.Point(0, 0);
-            this.panelProfileNamesPlaceholder.Name = "panelProfileNamesPlaceholder";
-            this.panelProfileNamesPlaceholder.Size = new System.Drawing.Size(302, 27);
-            this.panelProfileNamesPlaceholder.TabIndex = 4;
-            this.panelProfileNamesPlaceholder.Text = "dev_raccoon";
-            this.panelProfileNamesPlaceholder.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.panelProfileNamesPlaceholder.Visible = false;
-            // 
-            // panelToTitle
-            // 
-            this.panelToTitle.AutoSize = true;
-            this.panelToTitle.Font = new System.Drawing.Font("Bahnschrift Light", 10F);
-            this.panelToTitle.ForeColor = System.Drawing.Color.DarkGray;
-            this.panelToTitle.Location = new System.Drawing.Point(525, 70);
-            this.panelToTitle.Name = "panelToTitle";
-            this.panelToTitle.Size = new System.Drawing.Size(97, 17);
-            this.panelToTitle.TabIndex = 3;
-            this.panelToTitle.Text = "Profile names";
-            // 
-            // transferRight
-            // 
-            this.transferRight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.transferRight.BackColor = System.Drawing.Color.DimGray;
-            this.transferRight.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.transferRight.FlatAppearance.BorderSize = 0;
-            this.transferRight.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.transferRight.Font = new System.Drawing.Font("Bahnschrift SemiBold", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.transferRight.ForeColor = System.Drawing.Color.LightGray;
-            this.transferRight.Location = new System.Drawing.Point(686, 3);
-            this.transferRight.Name = "transferRight";
-            this.transferRight.Size = new System.Drawing.Size(146, 42);
-            this.transferRight.TabIndex = 9;
-            this.transferRight.Text = "˃˃   Transfer   ˃˃";
-            this.transferRight.UseVisualStyleBackColor = false;
-            this.transferRight.Click += new System.EventHandler(this.transferRight_Click);
+            this.transferAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.transferAll.BackColor = System.Drawing.Color.DimGray;
+            this.transferAll.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.transferAll.FlatAppearance.BorderSize = 0;
+            this.transferAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.transferAll.Font = new System.Drawing.Font("Bahnschrift SemiBold", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.transferAll.ForeColor = System.Drawing.Color.LightGray;
+            this.transferAll.Location = new System.Drawing.Point(661, 21);
+            this.transferAll.Name = "transferAll";
+            this.transferAll.Size = new System.Drawing.Size(217, 42);
+            this.transferAll.TabIndex = 9;
+            this.transferAll.Text = "Transfer profiles";
+            this.transferAll.UseVisualStyleBackColor = false;
+            this.transferAll.Click += new System.EventHandler(this.transferAll_Click);
             // 
             // panelToBrowse
             // 
@@ -369,6 +375,7 @@
             this.panelToBrowse.TabIndex = 2;
             this.panelToBrowse.Text = "Find";
             this.panelToBrowse.UseVisualStyleBackColor = false;
+            this.panelToBrowse.Visible = false;
             this.panelToBrowse.Click += new System.EventHandler(this.panelToBrowse_Click);
             // 
             // tabTransferTo
@@ -540,6 +547,57 @@
             this.panelTransferFreely.Size = new System.Drawing.Size(838, 432);
             this.panelTransferFreely.TabIndex = 7;
             // 
+            // panelClearSelected
+            // 
+            this.panelClearSelected.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelClearSelected.AutoSize = true;
+            this.panelClearSelected.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.panelClearSelected.Font = new System.Drawing.Font("Bahnschrift Light", 8F);
+            this.panelClearSelected.ForeColor = System.Drawing.Color.DarkGray;
+            this.panelClearSelected.Location = new System.Drawing.Point(753, 6);
+            this.panelClearSelected.Name = "panelClearSelected";
+            this.panelClearSelected.Size = new System.Drawing.Size(79, 13);
+            this.panelClearSelected.TabIndex = 10;
+            this.panelClearSelected.Text = "Clear selected";
+            this.panelClearSelected.Visible = false;
+            this.panelClearSelected.Click += new System.EventHandler(this.panelClearSelected_Click);
+            this.panelClearSelected.MouseEnter += new System.EventHandler(this.panelClearSelected_MouseEnter);
+            this.panelClearSelected.MouseLeave += new System.EventHandler(this.panelClearSelected_MouseLeave);
+            // 
+            // selectAllProfiles
+            // 
+            this.selectAllProfiles.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.selectAllProfiles.BackColor = System.Drawing.Color.DimGray;
+            this.selectAllProfiles.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.selectAllProfiles.FlatAppearance.BorderSize = 0;
+            this.selectAllProfiles.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.selectAllProfiles.Font = new System.Drawing.Font("Bahnschrift SemiBold", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.selectAllProfiles.ForeColor = System.Drawing.Color.LightGray;
+            this.selectAllProfiles.Location = new System.Drawing.Point(661, 76);
+            this.selectAllProfiles.Name = "selectAllProfiles";
+            this.selectAllProfiles.Size = new System.Drawing.Size(101, 42);
+            this.selectAllProfiles.TabIndex = 11;
+            this.selectAllProfiles.Text = "Select all";
+            this.selectAllProfiles.UseVisualStyleBackColor = false;
+            this.selectAllProfiles.Click += new System.EventHandler(this.selectAllProfiles_Click);
+            // 
+            // unSelectAll
+            // 
+            this.unSelectAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.unSelectAll.BackColor = System.Drawing.Color.DimGray;
+            this.unSelectAll.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.unSelectAll.FlatAppearance.BorderSize = 0;
+            this.unSelectAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.unSelectAll.Font = new System.Drawing.Font("Bahnschrift SemiBold", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.unSelectAll.ForeColor = System.Drawing.Color.LightGray;
+            this.unSelectAll.Location = new System.Drawing.Point(777, 76);
+            this.unSelectAll.Name = "unSelectAll";
+            this.unSelectAll.Size = new System.Drawing.Size(101, 42);
+            this.unSelectAll.TabIndex = 12;
+            this.unSelectAll.Text = "Unselect all";
+            this.unSelectAll.UseVisualStyleBackColor = false;
+            this.unSelectAll.Click += new System.EventHandler(this.unSelectAll_Click);
+            // 
             // profileForm
             // 
             this.AllowDrop = true;
@@ -547,6 +605,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(40)))));
             this.ClientSize = new System.Drawing.Size(936, 588);
+            this.Controls.Add(this.unSelectAll);
+            this.Controls.Add(this.selectAllProfiles);
+            this.Controls.Add(this.transferAll);
             this.Controls.Add(this.tabTransferFrom);
             this.Controls.Add(this.panelFromBrowse);
             this.Controls.Add(this.tabTransferTo);
@@ -572,10 +633,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.watermarkIcon)).EndInit();
             this.panelProfiles.ResumeLayout(false);
             this.panelProfiles.PerformLayout();
+            this.panelProfileNamesList.ResumeLayout(false);
             this.panelProfilesList.ResumeLayout(false);
             this.panelNewServer.ResumeLayout(false);
             this.panelNewServer.PerformLayout();
-            this.panelProfileNamesList.ResumeLayout(false);
             this.panelTransferTo.ResumeLayout(false);
             this.panelNewOptions.ResumeLayout(false);
             this.easyProfilePanel.ResumeLayout(false);
@@ -592,7 +653,7 @@
         public System.Windows.Forms.Label watermarkCompatibility;
         public System.Windows.Forms.PictureBox watermarkIcon;
         public System.Windows.Forms.Label watermarkTitle;
-        public System.Windows.Forms.Label panelFromLocationTitle;
+        public System.Windows.Forms.Label serverLocationTitle;
         public System.Windows.Forms.Label panelFromTitle;
         public System.Windows.Forms.Panel panelNewServer;
         public System.Windows.Forms.Label currentLocation;
@@ -605,8 +666,8 @@
         public System.Windows.Forms.Label panelToTitle;
         public System.Windows.Forms.Panel panelProfileNamesList;
         public System.Windows.Forms.Label panelProfileNamesPlaceholder;
-        public System.Windows.Forms.Label panelFromClear;
-        public System.Windows.Forms.Button transferRight;
+        public System.Windows.Forms.Label panelClearAllProfiles;
+        public System.Windows.Forms.Button transferAll;
         public System.Windows.Forms.Button tabTransferTo;
         public System.Windows.Forms.Button tabTransferFrom;
         public System.Windows.Forms.Panel panelTransferTo;
@@ -621,9 +682,12 @@
         public System.Windows.Forms.Button newOptionsTransfer;
         public System.Windows.Forms.Label newOptionsWarning;
         public System.Windows.Forms.Timer constructionTimer;
-        public System.Windows.Forms.Label panelFromLocation;
+        public System.Windows.Forms.Label serverLocation;
         public System.Windows.Forms.Panel panelProfiles;
         public System.Windows.Forms.Panel panelTransferFreely;
+        public System.Windows.Forms.Label panelClearSelected;
+        public System.Windows.Forms.Button selectAllProfiles;
+        public System.Windows.Forms.Button unSelectAll;
     }
 }
 
